@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BHZ-STORE | Inicio</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0b0b0b;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+            width: 100vw;
+            overflow-x: hidden;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            letter-spacing: 2px;
+            margin-top: 30px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            text-align: center;
+            width: 100%;
+            animation: entradaElegante 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+        
+        p.subtitulo {
+            color: #888888;
+            margin-bottom: 35px;
+            font-size: 1.05rem;
+            font-weight: 300;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0 15px;
+            opacity: 0;
+            animation: aparecerSuave 1s ease-out 0.3s forwards;
+        }
+
+        .seccion-novedades {
+            width: 100%;
+            margin-bottom: 35px;
+            opacity: 0;
+            animation: aparecerSuave 1s ease-out 0.5s forwards;
+        }
+
+        .titulo-novedades {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ffffff;
+            margin-bottom: 15px;
+            font-weight: 600;
+            padding: 0 20px;
+            text-align: left;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .slider-visor {
+            width: 100%;
+            overflow-x: auto; 
+            overflow-y: hidden; 
+            background: #111111;
+            padding: 15px 0;
+            border-top: 1px solid #1a1a1a;
+            border-bottom: 1px solid #1a1a1a;
+            display: flex;
+            -webkit-overflow-scrolling: touch; 
+            scroll-behavior: smooth;
+        }
+
+        .slider-visor::-webkit-scrollbar {
+            display: none;
+        }
+
+        .slider-riel {
+            display: flex;
+            gap: 15px;
+            padding: 0 20px; 
+            width: max-content;
+        }
+
+        .tarjeta-novedad {
+            background: #1a1a1a;
+            width: 160px;
+            padding: 0; /* Sin relleno arriba para que la imagen ocupe todo */
+            border-radius: 10px;
+            border: 1px solid #262626;
+            flex-shrink: 0; 
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s, border-color 0.2s;
+            -webkit-tap-highlight-color: transparent;
+            overflow: hidden; /* Esconde lo que sobresalga */
+        }
+
+        .tarjeta-novedad:active {
+            transform: scale(0.96);
+            border-color: #25d366; 
+        }
+
+        /* IMAGEN OCUPANDO TODO EL ESPACIO SUPERIOR */
+        .tarjeta-novedad img {
+            width: 100%;
+            height: 130px;
+            object-fit: cover; /* ✅ LLENA TODO EL ESPACIO SIN DEFORMARSE */
+            object-position: center;
+            margin: 0;
+            border-radius: 0; /* Esquinas rectas arriba */
+        }
+
+        /* Contenido de texto con su propio relleno */
+        .tarjeta-contenido {
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .tarjeta-novedad h4 {
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .tarjeta-novedad p {
+            font-size: 0.78rem;
+            color: #aaaaaa;
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        .tarjeta-novedad .precio-tag {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #27ae60;
+            margin-top: 2px;
+        }
+
+        .boton-whatsapp {
+            display: block;
+            background-color: #25d366;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 8px 10px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-align: center;
+            margin-top: 4px;
+            border-radius: 8px;
+            transition: background-color 0.2s;
+        }
+
+        .boton-whatsapp:hover {
+            background-color: #20bd5a;
+        }
+
+        @keyframes entradaElegante {
+            0% { opacity: 0; transform: translateY(20px) scale(0.95); letter-spacing: -2px; }
+            100% { opacity: 1; transform: translateY(0) scale(1); letter-spacing: 2px; }
+        }
+
+        @keyframes aparecerSuave {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .contenedor-categorias {
+            display: flex;
+            flex-direction: column;
+            gap: 0px;
+            width: 100%;
+            opacity: 0;
+            animation: aparecerSuave 1s ease-out 0.6s forwards;
+        }
+
+        .bloque-categoria {
+            position: relative;
+            width: 100%;
+            height: 260px;
+            text-decoration: none;
+            color: #ffffff;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            overflow: hidden;
+            border-bottom: 1px solid #1a1a1a;
+            box-sizing: border-box;
+            z-index: 1;
+            transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent; 
+        }
+
+        .foto-categoria {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center; 
+            transform: translate(-50%, -50%); 
+            background-color: #121212;
+            filter: brightness(0.3) grayscale(0.2);
+            opacity: 0.6;
+            transition: all 0.4s ease;
+        }
+
+        .texto-categoria {
+            position: relative;
+            z-index: 4; 
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-align: center;
+            width: 100%; 
+            margin-bottom: 25px; 
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+            transition: all 0.3s ease;
+        }
+
+        .bloque-categoria::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 90px; 
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .bloque-categoria::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            box-shadow: inset 0 0 30px rgba(255, 255, 255, 0);
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .bloque-categoria:hover, 
+        .bloque-categoria:active {
+            z-index: 10; 
+            box-shadow: 0 0 35px rgba(255, 255, 255, 0.6), inset 0 0 50px rgba(255, 255, 255, 0.4);
+            border-color: #ffffff;
+        }
+
+        .bloque-categoria:hover .foto-categoria, 
+        .bloque-categoria:active .foto-categoria {
+            filter: brightness(1.3) grayscale(0); 
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.02); 
+        }
+
+        .bloque-categoria:hover::after,
+        .bloque-categoria:active::after {
+            box-shadow: inset 0 0 50px rgba(255, 255, 255, 0.5);
+        }
+
+        .bloque-categoria:hover .texto-categoria,
+        .bloque-categoria:active .texto-categoria {
+            transform: translateY(-2px) scale(1.03);
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.6), 0 2px 10px rgba(0, 0, 0, 1);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>BHZ-STORE</h1>
+    <p class="subtitulo">Conecta con lo mejor del mundo</p>
+
+    <!-- 🛍️ SECCIÓN: LO ÚLTIMO EN VENTA (IMÁGENES A TAMAÑO COMPLETO) -->
+    <div class="seccion-novedades">
+        <div class="titulo-novedades">Lo último en venta</div>
+        <div class="slider-visor">
+            <div class="slider-riel">
+                
+                <!-- PRODUCTO 1: Navigata -->
+                <div class="tarjeta-novedad">
+                    <img src="imagenes/imagen23.jpg" alt="Navigata">
+                    <div class="tarjeta-contenido">
+                        <h4>Osadia</h4>
+                        <p>Yambal/ Osadia mujer 50ml</p>
+                        <span class="precio-tag">S/89.99</span>
+                        <a href="https://wa.me/51923583195" class="boton-whatsapp">
+                            💬 Pedir al 51923583195
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- PRODUCTO 2: Adidas Running -->
+                <div class="tarjeta-novedad">
+                    <img src="imagenes/imagen27.jpg" alt="Adidas Running">
+                    <div class="tarjeta-contenido">
+                        <h4>Lethal Neighbor</h4>
+                        <p>Mess Toys/ Figura Lethal Neighbor Venom</p>
+                        <span class="precio-tag">S/199.99</span>
+                        <a href="https://wa.me/51923583195" class="boton-whatsapp">
+                            💬 Pedir al 51923583195
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- PRODUCTO 3: Casaca Mossimo -->
+                <div class="tarjeta-novedad">
+                    <img src="imagenes/imagen26.jpg" alt="Casaca Mossimo">
+                    <div class="tarjeta-contenido">
+                        <h4>Lenovo</h4>
+                        <p>Lenovo/ Auriculares XTT88 TWS</p>
+                        <span class="precio-tag">S/99.99</span>
+                        <a href="https://wa.me/51923583195" class="boton-whatsapp">
+                            💬 Pedir al 51923583195
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- 🔥 APARTADOS DEL CATÁLOGO -->
+    <div class="contenedor-categorias">
+        <a href="ropa.html" target="_blank" class="bloque-categoria">
+            <img src="imagenes/imagen19.jpg" alt="Ropa" class="foto-categoria">
+            <span class="texto-categoria">Ropa</span>
+        </a>
+        <a href="zapatillas.html" target="_blank" class="bloque-categoria">
+            <img src="imagenes/imagen18.jpg" alt="Zapatillas" class="foto-categoria">
+            <span class="texto-categoria">Zapatillas</span>
+        </a>
+        <a href="perfumes.html" target="_blank" class="bloque-categoria">
+            <img src="imagenes/imagen17.jpg" alt="Perfumes" class="foto-categoria">
+            <span class="texto-categoria">Perfumes</span>
+        </a>
+        <a href="cuidado-personal.html" target="_blank" class="bloque-categoria">
+            <img src="imagenes/imagen20.jpg" alt="Cuidado Personal" class="foto-categoria">
+            <span class="texto-categoria">Cuidado Personal</span>
+        </a>
+    </div>
+
+</body>
+</html>
+
+
